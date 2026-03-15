@@ -1,0 +1,10 @@
+export { default as AboutSection } from "@/components/landing/AboutSection";
+export { default as ContactSection } from "@/components/landing/ContactSection";
+export { default as Footer } from "@/components/landing/Footer";
+export { default as Header } from "@/components/landing/Header";
+export { default as Hero } from "@/components/landing/Hero";
+export { default as PortfolioSection } from "@/components/landing/PortfolioSection";
+export { default as ProcessSection } from "@/components/landing/ProcessSection";
+export { default as ServicesSection } from "@/components/landing/ServicesSection";
+export { default as TechSection } from "@/components/landing/TechSection";
+export { default as TestimonialsSection } from "@/components/landing/TestimonialsSection";

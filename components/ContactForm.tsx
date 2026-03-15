@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState, type FormEvent } from "react";
 import { IconArrowRight } from "@/components/icons";
 
 type Status =
@@ -19,25 +19,25 @@ export default function ContactForm() {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
 
-  const canSubmit = useMemo(() => {
-    return name.trim().length >= 2 && isEmail(email) && description.trim().length >= 10;
-  }, [name, email, description]);
+  const canSubmit =
+    name.trim().length >= 2 && isEmail(email) && description.trim().length >= 10;
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     if (!canSubmit) {
       setStatus({
         kind: "error",
-        message: "Please add your name, a valid email, and a short project description."
+        message: "Add your name, a valid email, and a short description of the project."
       });
       return;
     }
 
     setStatus({ kind: "submitting" });
-    await new Promise((r) => setTimeout(r, 700));
+    await new Promise((resolve) => setTimeout(resolve, 700));
     setStatus({
       kind: "success",
-      message: "Thanks. We will reach out within 1 business day with next steps."
+      message: "Thanks. We will reach out within one business day with next steps."
     });
     setName("");
     setEmail("");
@@ -45,24 +45,24 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} style={{ display: "grid", gap: 12 }}>
-      <div style={{ display: "grid", gap: 6 }}>
-        <label htmlFor="name" style={{ fontSize: 13, color: "var(--muted)" }}>
+    <form className="formGrid" onSubmit={onSubmit}>
+      <div className="fieldGroup">
+        <label htmlFor="name" className="fieldLabel">
           Name
         </label>
         <input
           id="name"
           name="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(event) => setName(event.target.value)}
           placeholder="Your name"
           autoComplete="name"
-          style={inputStyle}
+          className="fieldControl"
         />
       </div>
 
-      <div style={{ display: "grid", gap: 6 }}>
-        <label htmlFor="email" style={{ fontSize: 13, color: "var(--muted)" }}>
+      <div className="fieldGroup">
+        <label htmlFor="email" className="fieldLabel">
           Email
         </label>
         <input
@@ -70,25 +70,26 @@ export default function ContactForm() {
           name="email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           placeholder="you@company.com"
           autoComplete="email"
-          style={inputStyle}
+          className="fieldControl"
         />
       </div>
 
-      <div style={{ display: "grid", gap: 6 }}>
-        <label htmlFor="desc" style={{ fontSize: 13, color: "var(--muted)" }}>
+      <div className="fieldGroup">
+        <label htmlFor="description" className="fieldLabel">
           Project description
         </label>
         <textarea
-          id="desc"
+          id="description"
           name="description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="What are you building, when do you need it, and what does success look like?"
-          rows={5}
-          style={{ ...inputStyle, resize: "vertical", paddingTop: 12 }}
+          onChange={(event) => setDescription(event.target.value)}
+          placeholder="What are you building, what is the timeline, and where is the main delivery risk?"
+          rows={6}
+          className="fieldControl"
+          style={{ resize: "vertical" }}
         />
       </div>
 
@@ -98,45 +99,31 @@ export default function ContactForm() {
         disabled={!canSubmit || status.kind === "submitting"}
         style={{
           width: "100%",
-          justifyContent: "center",
           opacity: !canSubmit || status.kind === "submitting" ? 0.7 : 1
         }}
       >
-        {status.kind === "submitting" ? "Sending..." : "Discuss Your Project"}{" "}
+        {status.kind === "submitting" ? "Sending..." : "Discuss Your Project"}
         <IconArrowRight />
       </button>
 
       <div
         aria-live="polite"
+        className="formNote"
         style={{
-          minHeight: 18,
-          fontSize: 13,
           color:
             status.kind === "error"
-              ? "#b42318"
+              ? "#ff9f96"
               : status.kind === "success"
-                ? "#0b5d1e"
+                ? "#9bf5d0"
                 : "var(--muted)"
         }}
       >
-        {status.kind === "error"
-          ? status.message
-          : status.kind === "success"
-            ? status.message
-            : "We will never share your contact details."}
+        {status.kind === "idle"
+          ? "We never share contact details outside the conversation."
+          : status.kind === "submitting"
+            ? "Preparing your message..."
+            : status.message}
       </div>
     </form>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "10px 12px",
-  borderRadius: 14,
-  border: "1px solid rgba(37, 99, 235, 0.18)",
-  background: "rgba(255,255,255,0.9)",
-  outline: "none",
-  boxShadow: "0 1px 0 rgba(37, 99, 235, 0.05)",
-  transition: "box-shadow 180ms ease, border-color 180ms ease"
-};
-

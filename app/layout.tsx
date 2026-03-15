@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SU Solutions | Software Development Company",
+  title: "SU Solutions | Serious Technology Delivery",
   description:
-    "Modern software development studio building web, mobile, and backend systems with a focus on clarity, quality, and delivery.",
-  metadataBase: new URL("https://example.com"),
+    "Modern web, mobile, and backend systems for teams that need clean architecture, sharp design, and predictable releases.",
   openGraph: {
-    title: "SU Solutions | Software Development Company",
+    title: "SU Solutions | Serious Technology Delivery",
     description:
-      "Web, mobile, and backend development for teams that value predictable delivery and clean engineering.",
+      "Technology delivery partner for modern product teams building web, mobile, and backend platforms.",
     type: "website"
   }
 };
@@ -25,4 +24,3 @@ export default function RootLayout({
     </html>
   );
 }
-
