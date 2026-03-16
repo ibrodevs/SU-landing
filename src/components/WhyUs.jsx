@@ -8,12 +8,12 @@ const iconMap = { Cpu, Layers, Sparkles, ShieldCheck, Rocket, Headset };
 
 // Статичная карта градиентов свечения для hover-границы
 const glowMap = {
-  "from-blue-600 to-indigo-600":   "hover:shadow-[0_0_0_1px_rgba(99,102,241,0.6),0_16px_40px_rgba(99,102,241,0.18)]",
-  "from-violet-600 to-purple-600": "hover:shadow-[0_0_0_1px_rgba(139,92,246,0.6),0_16px_40px_rgba(139,92,246,0.18)]",
-  "from-fuchsia-600 to-pink-500":  "hover:shadow-[0_0_0_1px_rgba(217,70,239,0.6),0_16px_40px_rgba(217,70,239,0.18)]",
-  "from-emerald-600 to-teal-500":  "hover:shadow-[0_0_0_1px_rgba(16,185,129,0.6),0_16px_40px_rgba(16,185,129,0.18)]",
-  "from-orange-500 to-amber-400":  "hover:shadow-[0_0_0_1px_rgba(245,158,11,0.6),0_16px_40px_rgba(245,158,11,0.18)]",
-  "from-sky-600 to-cyan-500":      "hover:shadow-[0_0_0_1px_rgba(14,165,233,0.6),0_16px_40px_rgba(14,165,233,0.18)]",
+  "from-blue-700 to-indigo-700":  "hover:shadow-[0_0_0_1px_rgba(29,78,216,0.5),0_16px_40px_rgba(29,78,216,0.18)]",
+  "from-slate-600 to-slate-700":  "hover:shadow-[0_0_0_1px_rgba(71,85,105,0.5),0_16px_40px_rgba(71,85,105,0.18)]",
+  "from-indigo-700 to-blue-800":  "hover:shadow-[0_0_0_1px_rgba(67,56,202,0.5),0_16px_40px_rgba(67,56,202,0.18)]",
+  "from-blue-800 to-blue-900":    "hover:shadow-[0_0_0_1px_rgba(30,58,138,0.5),0_16px_40px_rgba(30,58,138,0.18)]",
+  "from-slate-600 to-zinc-700":   "hover:shadow-[0_0_0_1px_rgba(71,85,105,0.5),0_16px_40px_rgba(71,85,105,0.18)]",
+  "from-blue-700 to-indigo-800":  "hover:shadow-[0_0_0_1px_rgba(29,78,216,0.5),0_16px_40px_rgba(29,78,216,0.18)]",
 };
 
 function BentoCard({ item }) {

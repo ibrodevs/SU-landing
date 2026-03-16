@@ -23,13 +23,12 @@ function Navbar({ links, theme, onToggleTheme }) {
         }`}
       >
         <div className="flex h-16 items-center justify-between px-4">
-          <a href="#home" className="group inline-flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-sm font-extrabold text-white shadow-glow transition-transform duration-300 group-hover:scale-105">
-              SU
-            </span>
-            <span className="text-base font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:text-lg">
-              SU Solutions
-            </span>
+          <a href="#home" className="group inline-flex items-center">
+            <img
+              src="/Logo_SU.png"
+              alt="SU Solutions"
+              className="h-20 w-auto transition-transform duration-300 group-hover:scale-105"
+            />
           </a>
 
           <nav className="hidden items-center gap-6 md:flex lg:gap-8">

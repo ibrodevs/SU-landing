@@ -59,56 +59,60 @@ export const technologies = [
 
 export const projects = [
   {
-    name: "E-Learning Platform",
+    name: "Dordoi Info",
     category: "Web",
-    description: "A scalable learning ecosystem with personalized dashboards, progress analytics, and fully automated student onboarding flows.",
-    metric: "3× faster student onboarding",
+    description: "Information portal for Dordoi — Central Asia's largest trading hub. Features vendor directories, market news, and real-time navigation for businesses and visitors.",
+    metric: "Central Asia's largest market online",
     role: "Full-stack Development",
-    icon: "GraduationCap",
-    gradient: "from-blue-600 to-indigo-600",
+    icon: "Globe",
+    image: "/дордой.png",
+    gradient: "from-blue-600 to-blue-800",
     accentColor: "blue",
     tech: ["React", "Node.js", "PostgreSQL"],
-    githubUrl: "https://github.com",
-    liveUrl: "#"
+    githubUrl: null,
+    liveUrl: "https://www.dordoi.info/"
   },
   {
-    name: "FinTech Analytics Dashboard",
-    category: "Analytics",
-    description: "High-performance analytics product with real-time KPIs, secure data pipelines, and investor-facing reporting modules.",
-    metric: "2.4× faster reporting cycles",
-    role: "Frontend Architecture",
-    icon: "TrendingUp",
-    gradient: "from-emerald-500 to-teal-600",
-    accentColor: "emerald",
-    tech: ["TypeScript", "Vite", "Supabase"],
-    githubUrl: "https://github.com",
-    liveUrl: "#"
+    name: "KSAPCS",
+    category: "Web",
+    description: "Official institutional website featuring organizational news, regulatory publications, event management, and multi-department content workflows.",
+    metric: "Government-grade institutional platform",
+    role: "Frontend Development",
+    icon: "Building2",
+    image: "/kgafis.png",
+    gradient: "from-slate-700 to-slate-800",
+    accentColor: "slate",
+    tech: ["React", "Tailwind CSS"],
+    githubUrl: null,
+    liveUrl: "https://www.ksapcs.kg/"
   },
   {
-    name: "AI Automation Tool",
-    category: "AI",
-    description: "Internal operations assistant for workflow orchestration, document processing, and end-to-end productivity automation at scale.",
-    metric: "40% reduction in manual work",
-    role: "System Architecture & Backend",
-    icon: "Bot",
-    gradient: "from-violet-600 to-purple-600",
-    accentColor: "violet",
-    tech: ["Python", "Django", "Docker"],
-    githubUrl: "https://github.com",
-    liveUrl: "#"
-  },
-  {
-    name: "Business CRM System",
-    category: "CRM",
-    description: "End-to-end CRM for pipeline management, AI-assisted sales forecasting, and integrated communication across all channels.",
-    metric: "28% uplift in sales conversion",
+    name: "SU Library",
+    category: "Web",
+    description: "Digital library platform with advanced catalog search, user accounts, and resource management — providing seamless access to academic and scholarly collections.",
+    metric: "Full digital library ecosystem",
     role: "Full-stack Development",
-    icon: "Users",
-    gradient: "from-orange-500 to-amber-500",
-    accentColor: "orange",
-    tech: ["React", "Firebase", "Tailwind CSS"],
-    githubUrl: "https://github.com",
-    liveUrl: "#"
+    icon: "BookOpen",
+    image: "/su-library.png",
+    gradient: "from-blue-900 to-indigo-900",
+    accentColor: "indigo",
+    tech: ["React", "Node.js", "PostgreSQL"],
+    githubUrl: null,
+    liveUrl: "https://www.su-library.com/"
+  },
+  {
+    name: "Salymbekov",
+    category: "Web",
+    description: "Modern multi-page institutional website with responsive design, content management, and a polished user experience tailored for an educational brand.",
+    metric: "Clean, modern institutional presence",
+    role: "UI/UX & Frontend Development",
+    icon: "GraduationCap",
+    image: "/salymbekovuni.png",
+    gradient: "from-zinc-700 to-slate-700",
+    accentColor: "zinc",
+    tech: ["React", "Vite", "Tailwind CSS"],
+    githubUrl: null,
+    liveUrl: "https://salymbekov.vercel.app/"
   }
 ];
 
@@ -117,42 +121,42 @@ export const whyUs = [
     title: "Modern Technologies",
     description: "We build with the 2025 stack — React, TypeScript, Python, and cloud-native infrastructure — so your product stays fast, secure, and easy to evolve.",
     icon: "Cpu",
-    gradient: "from-blue-600 to-indigo-600",
+    gradient: "from-blue-700 to-indigo-700",
     span: "wide"
   },
   {
     title: "Scalable Architecture",
     description: "Systems designed from day one to handle millions of users without painful rewrites later.",
     icon: "Layers",
-    gradient: "from-violet-600 to-purple-600",
+    gradient: "from-slate-600 to-slate-700",
     span: "normal"
   },
   {
     title: "Clean Design",
     description: "Pixel-perfect interfaces that balance conversion goals, brand identity, and long-term usability.",
     icon: "Sparkles",
-    gradient: "from-fuchsia-600 to-pink-500",
+    gradient: "from-indigo-700 to-blue-800",
     span: "normal"
   },
   {
     title: "Professional Development",
     description: "Senior engineers on every project. No junior hand-offs, no surprise pivots mid-sprint.",
     icon: "ShieldCheck",
-    gradient: "from-emerald-600 to-teal-500",
+    gradient: "from-blue-800 to-blue-900",
     span: "normal"
   },
   {
     title: "Fast Delivery",
     description: "Iterative sprints and polished CI/CD pipelines let us ship a production-ready MVP in 4–6 weeks.",
     icon: "Rocket",
-    gradient: "from-orange-500 to-amber-400",
+    gradient: "from-slate-600 to-zinc-700",
     span: "normal"
   },
   {
     title: "Reliable Support",
     description: "Ongoing maintenance, proactive monitoring, and a dedicated point of contact after launch.",
     icon: "Headset",
-    gradient: "from-sky-600 to-cyan-500",
+    gradient: "from-blue-700 to-indigo-800",
     span: "wide"
   }
 ];
@@ -176,34 +180,34 @@ export const processSteps = [
     title: "Design",
     icon: "Pen",
     description: "We prototype UX flows and build a component-level UI system that reflects brand identity and drives conversions.",
-    color: "violet",
+    color: "slate",
     tags: []
   },
   {
     title: "Development",
     icon: "Code2",
     description: "We ship clean, tested code in iterative sprints — with daily builds, code reviews, and continuous integration from day one.",
-    color: "emerald",
+    color: "navy",
     tags: ["React", "Node.js", "TypeScript", "Docker"]
   },
   {
     title: "Testing",
     icon: "ShieldCheck",
     description: "We run automated and manual QA cycles covering functionality, performance, security, and cross-device compatibility.",
-    color: "amber",
+    color: "zinc",
     tags: []
   },
   {
     title: "Launch",
     icon: "Rocket",
     description: "We deploy to production with zero-downtime releases, set up monitoring, and hand over full documentation to your team.",
-    color: "rose",
+    color: "dark",
     tags: []
   }
 ];
 
 export const socialLinks = [
-  { label: "LinkedIn", href: "https://linkedin.com", icon: "Linkedin" },
-  { label: "GitHub", href: "https://github.com", icon: "Github" },
-  { label: "Telegram", href: "https://t.me", icon: "Send" }
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/su-solutions-bishkek/", icon: "Linkedin" },
+  { label: "Telegram", href: "https://t.me/saifullakh21", icon: "Send" },
+  { label: "Email", href: "mailto:susolutions25@gmail.com", icon: "Mail" }
 ];

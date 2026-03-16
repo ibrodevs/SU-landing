@@ -16,12 +16,12 @@ const iconMap = { Search, Map, Pen, Code2, ShieldCheck, Rocket };
 
 // Статичные конфиги цветов — без динамических классов Tailwind
 const colorConfig = {
-  blue:    { icon: "bg-blue-600",    ghost: "text-blue-100 dark:text-blue-950",    bar: "from-blue-600 to-indigo-600",   glow: "hover:shadow-[0_0_0_1px_rgba(37,99,235,0.5),0_16px_36px_rgba(37,99,235,0.14)]",    tag: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" },
-  indigo:  { icon: "bg-indigo-600",  ghost: "text-indigo-100 dark:text-indigo-950", bar: "from-indigo-600 to-violet-600",  glow: "hover:shadow-[0_0_0_1px_rgba(99,102,241,0.5),0_16px_36px_rgba(99,102,241,0.14)]",   tag: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300" },
-  violet:  { icon: "bg-violet-600",  ghost: "text-violet-100 dark:text-violet-950", bar: "from-violet-600 to-purple-500",  glow: "hover:shadow-[0_0_0_1px_rgba(124,58,237,0.5),0_16px_36px_rgba(124,58,237,0.14)]",  tag: "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300" },
-  emerald: { icon: "bg-emerald-600", ghost: "text-emerald-100 dark:text-emerald-950",bar: "from-emerald-600 to-teal-500",  glow: "hover:shadow-[0_0_0_1px_rgba(5,150,105,0.5),0_16px_36px_rgba(5,150,105,0.14)]",   tag: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300" },
-  amber:   { icon: "bg-amber-500",   ghost: "text-amber-100 dark:text-amber-950",   bar: "from-amber-500 to-orange-500",   glow: "hover:shadow-[0_0_0_1px_rgba(245,158,11,0.5),0_16px_36px_rgba(245,158,11,0.14)]",  tag: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300" },
-  rose:    { icon: "bg-rose-600",    ghost: "text-rose-100 dark:text-rose-950",     bar: "from-rose-600 to-pink-500",      glow: "hover:shadow-[0_0_0_1px_rgba(225,29,72,0.5),0_16px_36px_rgba(225,29,72,0.14)]",   tag: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300" },
+  blue:  { icon: "bg-blue-700",   ghost: "text-blue-100 dark:text-blue-950",   bar: "from-blue-700 to-indigo-700",  glow: "hover:shadow-[0_0_0_1px_rgba(29,78,216,0.5),0_16px_36px_rgba(29,78,216,0.14)]",   tag: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" },
+  indigo:{ icon: "bg-indigo-700", ghost: "text-indigo-100 dark:text-indigo-950",bar: "from-indigo-700 to-blue-800",   glow: "hover:shadow-[0_0_0_1px_rgba(67,56,202,0.5),0_16px_36px_rgba(67,56,202,0.14)]",  tag: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300" },
+  slate: { icon: "bg-slate-600",  ghost: "text-slate-300 dark:text-slate-900",  bar: "from-slate-600 to-slate-700",   glow: "hover:shadow-[0_0_0_1px_rgba(71,85,105,0.5),0_16px_36px_rgba(71,85,105,0.14)]",  tag: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300" },
+  navy:  { icon: "bg-blue-900",   ghost: "text-blue-200 dark:text-blue-950",   bar: "from-blue-900 to-indigo-900",   glow: "hover:shadow-[0_0_0_1px_rgba(30,58,138,0.5),0_16px_36px_rgba(30,58,138,0.14)]",  tag: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200" },
+  zinc:  { icon: "bg-zinc-600",   ghost: "text-zinc-300 dark:text-zinc-900",   bar: "from-zinc-600 to-zinc-700",     glow: "hover:shadow-[0_0_0_1px_rgba(82,82,91,0.5),0_16px_36px_rgba(82,82,91,0.14)]",   tag: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300" },
+  dark:  { icon: "bg-slate-700",  ghost: "text-slate-300 dark:text-slate-900",  bar: "from-slate-700 to-blue-900",    glow: "hover:shadow-[0_0_0_1px_rgba(51,65,85,0.5),0_16px_36px_rgba(30,58,138,0.14)]",  tag: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300" },
 };
 
 function ProcessCard({ step, index, isLast }) {

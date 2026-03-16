@@ -44,7 +44,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-blue-500/60 bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_45px_rgba(37,99,235,0.30)];
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-blue-800/60 bg-gradient-to-r from-blue-700 to-indigo-800 px-6 py-3 text-sm font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_45px_rgba(29,78,216,0.30)];
   }
 
   .btn-secondary {
@@ -52,7 +52,7 @@
   }
 
   .section-divider {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-blue-300/70 to-transparent dark:via-blue-500/60;
+    @apply h-px w-full bg-gradient-to-r from-transparent via-slate-300/50 to-transparent dark:via-slate-600/40;
   }
 }
 

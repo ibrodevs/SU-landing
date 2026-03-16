@@ -1,10 +1,16 @@
-import { Github, Linkedin, Send } from "lucide-react";
+import { Linkedin, Mail, Send } from "lucide-react";
 import { socialLinks } from "../data/siteData";
 
 const iconMap = {
   Linkedin,
-  Github,
-  Send
+  Send,
+  Mail
+};
+
+const socialMeta = {
+  LinkedIn: { label: "LinkedIn",                     sub: "su-solutions-bishkek" },
+  Telegram: { label: "Telegram",                    sub: "@saifullakh21" },
+  Email:    { label: "susolutions25@gmail.com",       sub: "Email us" },
 };
 
 function Footer({ links }) {
@@ -13,11 +19,8 @@ function Footer({ links }) {
       <div className="container-shell py-10 sm:py-12">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <a href="#home" className="inline-flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-sm font-extrabold text-white">
-                SU
-              </span>
-              <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100">SU Solutions</span>
+            <a href="#home" className="inline-block">
+              <img src="/Logo_SU.png" alt="SU Solutions" className="h-20 w-auto" />
             </a>
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
               Modern IT company delivering scalable software, premium interfaces,
@@ -45,21 +48,24 @@ function Footer({ links }) {
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800 dark:text-slate-200">Social</h4>
-              <div className="mt-3 flex items-center gap-3">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800 dark:text-slate-200">Contact & Social</h4>
+              <div className="mt-4 grid gap-3">
                 {socialLinks.map((social) => {
                   const Icon = iconMap[social.icon];
+                  const meta = socialMeta[social.label];
 
                   return (
                     <a
                       key={social.label}
                       href={social.href}
-                      target="_blank"
+                      target={social.href.startsWith("mailto") ? undefined : "_blank"}
                       rel="noreferrer"
-                      aria-label={social.label}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-blue-200 bg-white text-blue-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-blue-500/40 dark:bg-slate-900 dark:text-blue-300"
+                      className="group inline-flex items-center gap-3 text-sm text-slate-600 transition-colors hover:text-blue-700 dark:text-slate-300 dark:hover:text-blue-300"
                     >
-                      <Icon size={18} />
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition group-hover:border-blue-300 group-hover:text-blue-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:group-hover:border-blue-500/60 dark:group-hover:text-blue-300">
+                        <Icon size={15} />
+                      </span>
+                      <span className="font-medium">{meta ? meta.label : social.label}</span>
                     </a>
                   );
                 })}
