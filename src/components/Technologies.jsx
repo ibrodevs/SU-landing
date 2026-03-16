@@ -4,18 +4,15 @@ import {
   Server,
   Database,
   Cloud,
-  Shield,
-  Cpu,
   Zap,
   Box,
   GitBranch,
   Terminal,
-  Smartphone,
   Braces,
   Layers,
-  Workflow,
-  Lock,
-  Palette
+  Palette,
+  LayoutGrid,
+  ExternalLink,
 } from "lucide-react";
 import { technologies } from "../data/siteData";
 import SectionHeading from "./SectionHeading";
@@ -23,298 +20,369 @@ import Reveal from "./Reveal";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-// Категории технологий с уникальными стилями
-const techCategories = {
-  "React": { category: "Frontend", icon: Globe, gradient: "from-blue-600 to-cyan-600", level: 95 },
-  "Next.js": { category: "Frontend", icon: Globe, gradient: "from-slate-700 to-slate-900", level: 90 },
-  "TypeScript": { category: "Language", icon: Braces, gradient: "from-blue-700 to-blue-500", level: 92 },
-  "JavaScript": { category: "Language", icon: Code2, gradient: "from-yellow-500 to-amber-500", level: 98 },
-  "Node.js": { category: "Backend", icon: Server, gradient: "from-green-600 to-emerald-600", level: 94 },
-  "Python": { category: "Backend", icon: Terminal, gradient: "from-blue-600 to-indigo-600", level: 88 },
-  "Django": { category: "Backend", icon: Layers, gradient: "from-green-800 to-green-600", level: 85 },
-  "PostgreSQL": { category: "Database", icon: Database, gradient: "from-blue-800 to-blue-600", level: 90 },
-  "MongoDB": { category: "Database", icon: Database, gradient: "from-green-700 to-emerald-600", level: 87 },
-  "Redis": { category: "Database", icon: Database, gradient: "from-red-600 to-red-500", level: 82 },
-  "GraphQL": { category: "API", icon: GitBranch, gradient: "from-pink-600 to-rose-600", level: 86 },
-  "REST API": { category: "API", icon: Workflow, gradient: "from-purple-600 to-indigo-600", level: 95 },
-  "Docker": { category: "DevOps", icon: Box, gradient: "from-blue-500 to-sky-500", level: 89 },
-  "Kubernetes": { category: "DevOps", icon: Cpu, gradient: "from-blue-700 to-indigo-700", level: 83 },
-  "AWS": { category: "Cloud", icon: Cloud, gradient: "from-orange-500 to-yellow-500", level: 88 },
-  "Azure": { category: "Cloud", icon: Cloud, gradient: "from-blue-500 to-indigo-500", level: 85 },
-  "Git": { category: "Tools", icon: GitBranch, gradient: "from-orange-600 to-red-600", level: 96 },
-  "Figma": { category: "Design", icon: Palette, gradient: "from-purple-600 to-pink-600", level: 92 },
-  "Tailwind": { category: "Frontend", icon: Palette, gradient: "from-cyan-500 to-blue-500", level: 94 },
-  "Prisma": { category: "Database", icon: Database, gradient: "from-teal-600 to-emerald-600", level: 84 }
+// Данные технологий — соответствуют siteData.technologies
+const techData = {
+  "React": {
+    category: "Frontend",
+    icon: Globe,
+    gradient: "from-blue-600 to-cyan-500",
+    level: "Expert",
+    description: "Component-driven SPAs and interactive UIs",
+    link: "https://react.dev",
+    isCore: true,
+  },
+  "Vite": {
+    category: "Tools",
+    icon: Zap,
+    gradient: "from-violet-600 to-purple-500",
+    level: "Expert",
+    description: "Lightning-fast frontend build tooling",
+    link: "https://vitejs.dev",
+    isCore: false,
+  },
+  "Tailwind CSS": {
+    category: "Frontend",
+    icon: Palette,
+    gradient: "from-cyan-500 to-blue-500",
+    level: "Expert",
+    description: "Utility-first styling and rapid UI design",
+    link: "https://tailwindcss.com",
+    isCore: false,
+  },
+  "JavaScript": {
+    category: "Language",
+    icon: Code2,
+    gradient: "from-yellow-500 to-amber-400",
+    level: "Expert",
+    description: "Core language for web and server-side logic",
+    link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    isCore: true,
+  },
+  "TypeScript": {
+    category: "Language",
+    icon: Braces,
+    gradient: "from-blue-700 to-blue-500",
+    level: "Expert",
+    description: "Type-safe JS for scalable, maintainable codebases",
+    link: "https://www.typescriptlang.org",
+    isCore: false,
+  },
+  "Node.js": {
+    category: "Backend",
+    icon: Server,
+    gradient: "from-green-600 to-emerald-500",
+    level: "Expert",
+    description: "Server-side runtime for REST APIs and services",
+    link: "https://nodejs.org",
+    isCore: true,
+  },
+  "Python": {
+    category: "Backend",
+    icon: Terminal,
+    gradient: "from-blue-600 to-indigo-500",
+    level: "Advanced",
+    description: "Automation, data pipelines, and backend services",
+    link: "https://python.org",
+    isCore: false,
+  },
+  "Django": {
+    category: "Backend",
+    icon: Layers,
+    gradient: "from-green-800 to-green-600",
+    level: "Advanced",
+    description: "Full-stack Python framework with built-in admin",
+    link: "https://djangoproject.com",
+    isCore: false,
+  },
+  "PostgreSQL": {
+    category: "Database",
+    icon: Database,
+    gradient: "from-blue-800 to-blue-600",
+    level: "Advanced",
+    description: "Relational DB for complex queries and data integrity",
+    link: "https://postgresql.org",
+    isCore: false,
+  },
+  "Supabase": {
+    category: "BaaS",
+    icon: Database,
+    gradient: "from-emerald-600 to-teal-500",
+    level: "Advanced",
+    description: "Open-source Firebase alternative built on Postgres",
+    link: "https://supabase.com",
+    isCore: false,
+  },
+  "Firebase": {
+    category: "BaaS",
+    icon: Cloud,
+    gradient: "from-orange-500 to-yellow-500",
+    level: "Advanced",
+    description: "Real-time BaaS for auth, database, and hosting",
+    link: "https://firebase.google.com",
+    isCore: false,
+  },
+  "Git": {
+    category: "Tools",
+    icon: GitBranch,
+    gradient: "from-orange-600 to-red-500",
+    level: "Expert",
+    description: "Version control and collaborative development",
+    link: "https://git-scm.com",
+    isCore: true,
+  },
+  "Docker": {
+    category: "DevOps",
+    icon: Box,
+    gradient: "from-blue-500 to-sky-500",
+    level: "Advanced",
+    description: "Containerization and consistent environment deployment",
+    link: "https://docker.com",
+    isCore: false,
+  },
+  "Figma": {
+    category: "Design",
+    icon: Palette,
+    gradient: "from-purple-600 to-pink-500",
+    level: "Advanced",
+    description: "UI/UX design, prototyping, and design systems",
+    link: "https://figma.com",
+    isCore: false,
+  },
 };
 
-// Иконки для разных категорий
-const categoryIcons = {
-  Frontend: Globe,
-  Backend: Server,
-  Database: Database,
-  Language: Braces,
-  DevOps: Box,
-  Cloud: Cloud,
-  API: GitBranch,
-  Tools: Terminal,
-  Design: Palette,
-  Mobile: Smartphone,
-  Security: Shield
+// Конфигурация отображения категорий — статичные классы для Tailwind
+const categoryConfig = {
+  Frontend: {
+    icon: Globe,
+    label: "Frontend",
+    topBar: "from-blue-600 to-cyan-500",
+    border: "border-blue-200/60 dark:border-blue-800/40",
+    tag: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+    catText: "text-blue-600 dark:text-blue-400",
+    filterActive: "bg-blue-600 border-blue-600 text-white",
+    filterIdle: "border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20",
+  },
+  Language: {
+    icon: Braces,
+    label: "Language",
+    topBar: "from-amber-500 to-yellow-400",
+    border: "border-amber-200/60 dark:border-amber-800/40",
+    tag: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+    catText: "text-amber-600 dark:text-amber-400",
+    filterActive: "bg-amber-500 border-amber-500 text-white",
+    filterIdle: "border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20",
+  },
+  Backend: {
+    icon: Server,
+    label: "Backend",
+    topBar: "from-green-600 to-emerald-500",
+    border: "border-green-200/60 dark:border-green-800/40",
+    tag: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+    catText: "text-green-600 dark:text-green-400",
+    filterActive: "bg-green-600 border-green-600 text-white",
+    filterIdle: "border-green-200 dark:border-green-800 text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20",
+  },
+  Database: {
+    icon: Database,
+    label: "Database",
+    topBar: "from-violet-600 to-purple-500",
+    border: "border-violet-200/60 dark:border-violet-800/40",
+    tag: "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300",
+    catText: "text-violet-600 dark:text-violet-400",
+    filterActive: "bg-violet-600 border-violet-600 text-white",
+    filterIdle: "border-violet-200 dark:border-violet-800 text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-900/20",
+  },
+  BaaS: {
+    icon: Cloud,
+    label: "BaaS",
+    topBar: "from-cyan-500 to-teal-500",
+    border: "border-cyan-200/60 dark:border-cyan-800/40",
+    tag: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300",
+    catText: "text-cyan-600 dark:text-cyan-400",
+    filterActive: "bg-cyan-600 border-cyan-600 text-white",
+    filterIdle: "border-cyan-200 dark:border-cyan-800 text-cyan-700 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-900/20",
+  },
+  DevOps: {
+    icon: Box,
+    label: "DevOps",
+    topBar: "from-sky-500 to-blue-500",
+    border: "border-sky-200/60 dark:border-sky-800/40",
+    tag: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300",
+    catText: "text-sky-600 dark:text-sky-400",
+    filterActive: "bg-sky-600 border-sky-600 text-white",
+    filterIdle: "border-sky-200 dark:border-sky-800 text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-900/20",
+  },
+  Tools: {
+    icon: Terminal,
+    label: "Tools",
+    topBar: "from-orange-500 to-red-500",
+    border: "border-orange-200/60 dark:border-orange-800/40",
+    tag: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
+    catText: "text-orange-600 dark:text-orange-400",
+    filterActive: "bg-orange-500 border-orange-500 text-white",
+    filterIdle: "border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-300 bg-orange-50 dark:bg-orange-900/20",
+  },
+  Design: {
+    icon: Palette,
+    label: "Design",
+    topBar: "from-fuchsia-600 to-pink-500",
+    border: "border-fuchsia-200/60 dark:border-fuchsia-800/40",
+    tag: "bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300",
+    catText: "text-fuchsia-600 dark:text-fuchsia-400",
+    filterActive: "bg-fuchsia-600 border-fuchsia-600 text-white",
+    filterIdle: "border-fuchsia-200 dark:border-fuchsia-800 text-fuchsia-700 dark:text-fuchsia-300 bg-fuchsia-50 dark:bg-fuchsia-900/20",
+  },
 };
 
-function TechCard({ tech, index }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const techInfo = techCategories[tech] || {
-    category: "Other",
+const levelStyle = {
+  Expert: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
+  Advanced: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+  Proficient: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
+};
+
+function TechCard({ tech, isFiltered }) {
+  const info = techData[tech] || {
+    category: "Tools",
     icon: Code2,
     gradient: "from-slate-600 to-slate-800",
-    level: 75
+    level: "Proficient",
+    description: "",
+    link: "#",
+    isCore: false,
   };
-  
-  const Icon = techInfo.icon;
-  const CategoryIcon = categoryIcons[techInfo.category] || Code2;
-  
-  // Определяем цвет категории для фона
-  const categoryColors = {
-    Frontend: "blue",
-    Backend: "green",
-    Database: "purple",
-    Language: "yellow",
-    DevOps: "orange",
-    Cloud: "sky",
-    API: "pink",
-    Tools: "slate",
-    Design: "fuchsia",
-    Mobile: "indigo",
-    Security: "red",
-    Other: "gray"
-  };
-  
-  const color = categoryColors[techInfo.category] || "blue";
+  const Icon = info.icon;
+  const cat = categoryConfig[info.category] || categoryConfig.Tools;
+  const CatIcon = cat.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.03 }}
-      whileHover={{ 
-        y: -5,
-        scale: 1.02,
-        transition: { type: "spring", stiffness: 300 }
-      }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="relative group"
+    <motion.a
+      href={info.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      animate={{ opacity: isFiltered ? 0.2 : 1, scale: isFiltered ? 0.97 : 1 }}
+      transition={{ duration: 0.25 }}
+      whileHover={!isFiltered ? { y: -4, transition: { type: "spring", stiffness: 300 } } : {}}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow duration-300 dark:bg-slate-900 ${cat.border} ${isFiltered ? "pointer-events-none" : "hover:shadow-md"} ${info.isCore ? "ring-1 ring-blue-400/40 ring-offset-1 dark:ring-blue-500/30" : ""}`}
     >
-      {/* Основная карточка */}
-      <div className={`relative overflow-hidden rounded-xl bg-white dark:bg-slate-900 border-2 border-${color}-200/50 dark:border-${color}-800/30 hover:border-${color}-400/50 dark:hover:border-${color}-600/50 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-${color}-500/10`}>
-        
-        {/* Градиентный фон при наведении */}
-        <motion.div
-          className={`absolute inset-0 bg-gradient-to-br ${techInfo.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-          animate={{
-            scale: isHovered ? 1.1 : 1,
-          }}
-        />
-        
-        {/* Анимированная линия сверху */}
-        <motion.div
-          className={`absolute top-0 left-0 h-1 bg-gradient-to-r ${techInfo.gradient}`}
-          initial={{ width: "0%" }}
-          animate={{ width: isHovered ? "100%" : "0%" }}
-          transition={{ duration: 0.3 }}
-        />
+      {/* Цветная полоска сверху — всегда видна, цвет = категория */}
+      <div className={`h-1 w-full flex-shrink-0 bg-gradient-to-r ${cat.topBar}`} />
 
-        {/* Декоративные элементы */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className={`absolute -right-4 -top-4 w-16 h-16 bg-${color}-500/5 rounded-full blur-2xl group-hover:bg-${color}-500/10 transition-all duration-500`} />
-          <div className={`absolute -left-4 -bottom-4 w-12 h-12 bg-${color}-500/5 rounded-full blur-xl group-hover:bg-${color}-500/10 transition-all duration-500`} />
-        </div>
-
-        {/* Контент */}
-        <div className="relative p-5">
-          {/* Верхняя часть с иконками */}
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-3">
-              {/* Основная иконка технологии */}
-              <motion.div
-                className={`relative flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${techInfo.gradient} text-white shadow-md`}
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Icon size={18} />
-              </motion.div>
-
-              {/* Название технологии */}
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-white">
-                  {tech}
-                </h3>
-                <div className="flex items-center gap-1 mt-0.5">
-                  <CategoryIcon size={10} className={`text-${color}-600 dark:text-${color}-400`} />
-                  <span className={`text-xs font-medium text-${color}-600 dark:text-${color}-400`}>
-                    {techInfo.category}
+      <div className="flex flex-1 flex-col gap-3 p-5">
+        {/* Иконка + название + уровень */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-center gap-3">
+            <div className={`grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-gradient-to-br ${info.gradient} text-white shadow-md`}>
+              <Icon size={18} />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <h3 className="font-bold leading-tight text-slate-900 dark:text-white">{tech}</h3>
+                {info.isCore && (
+                  <span className="rounded-full bg-blue-600 px-1.5 py-0.5 text-[9px] font-bold text-white">
+                    CORE
                   </span>
-                </div>
+                )}
+              </div>
+              <div className={`mt-0.5 flex items-center gap-1 ${cat.catText}`}>
+                <CatIcon size={10} />
+                <span className="text-xs font-medium">{info.category}</span>
               </div>
             </div>
-
-            {/* Индикатор популярности/уровня */}
-            <motion.div
-              className={`text-sm font-bold bg-${color}-100 dark:bg-${color}-900/30 text-${color}-700 dark:text-${color}-300 px-2 py-1 rounded-md`}
-              animate={{
-                scale: isHovered ? 1.1 : 1,
-              }}
-            >
-              {techInfo.level}%
-            </motion.div>
           </div>
+          <span className={`flex-shrink-0 rounded-md px-2 py-1 text-[10px] font-semibold ${levelStyle[info.level] || levelStyle.Proficient}`}>
+            {info.level}
+          </span>
+        </div>
 
-          {/* Прогресс бар */}
-          <div className="mt-4 relative">
-            <div className={`h-1.5 w-full bg-${color}-100 dark:bg-${color}-900/30 rounded-full overflow-hidden`}>
-              <motion.div
-                className={`h-full bg-gradient-to-r ${techInfo.gradient} rounded-full`}
-                initial={{ width: "0%" }}
-                animate={{ width: isHovered ? `${techInfo.level}%` : "0%" }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              />
-            </div>
-          </div>
+        {/* Описание — flex-1 занимает оставшееся место → одинаковая высота карточек */}
+        <p className="flex-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+          {info.description}
+        </p>
 
-          {/* Теги (для дополнительной информации) */}
-          <div className="mt-3 flex gap-1">
-            <span className={`text-[10px] px-2 py-0.5 rounded-full bg-${color}-100 dark:bg-${color}-900/30 text-${color}-700 dark:text-${color}-300`}>
-              #{techInfo.category.toLowerCase()}
+        {/* Теги + ссылка */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap gap-1.5">
+            <span className={`rounded-full px-2 py-0.5 text-[10px] ${cat.tag}`}>
+              #{info.category.toLowerCase()}
             </span>
-            <span className={`text-[10px] px-2 py-0.5 rounded-full bg-${color}-100 dark:bg-${color}-900/30 text-${color}-700 dark:text-${color}-300`}>
+            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-500 dark:bg-slate-800 dark:text-slate-400">
               #production
             </span>
           </div>
+          <ExternalLink
+            size={12}
+            className="flex-shrink-0 text-slate-300 transition-colors group-hover:text-slate-500 dark:text-slate-600 dark:group-hover:text-slate-400"
+          />
         </div>
       </div>
-
-      {/* Микро-анимация при наведении (точки) */}
-      {isHovered && (
-        <motion.div
-          className="absolute -top-1 -right-1 w-2 h-2 rounded-full"
-          style={{ backgroundColor: `var(--${color}-500)` }}
-          initial={{ scale: 0 }}
-          animate={{ scale: [0, 1, 0] }}
-          transition={{ repeat: Infinity, duration: 1 }}
-        />
-      )}
-    </motion.div>
+    </motion.a>
   );
 }
 
 function Technologies() {
-  // Группировка технологий по категориям
-  const groupedTechs = technologies.reduce((acc, tech) => {
-    const category = techCategories[tech]?.category || "Other";
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(tech);
-    return acc;
-  }, {});
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  // Порядок отображения категорий в фильтре
+  const categoryOrder = ["All", "Frontend", "Language", "Backend", "Database", "BaaS", "DevOps", "Tools", "Design"];
+  const presentCategories = categoryOrder.filter(
+    (cat) => cat === "All" || technologies.some((t) => techData[t]?.category === cat)
+  );
 
   return (
-    <section id="technologies" className="relative py-24 overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
-      
-      {/* Фоновые элементы */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Цветные сферы для разных категорий */}
-        <div className="absolute top-20 left-20 w-64 h-64 bg-blue-400/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-64 h-64 bg-green-400/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 right-1/3 w-48 h-48 bg-purple-400/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 left-1/3 w-56 h-56 bg-yellow-400/5 rounded-full blur-3xl" />
-        
-        {/* Сетка */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:32px_32px]" />
-        
-        {/* Плавающие иконки */}
-        {Object.keys(techCategories).slice(0, 8).map((tech, i) => {
-          const Icon = techCategories[tech].icon;
-          return (
-            <motion.div
-              key={tech}
-              className="absolute opacity-5"
-              initial={{
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-              }}
-              animate={{
-                y: [null, -30, 30, -30],
-                x: [null, 30, -30, 30],
-              }}
-              transition={{
-                duration: Math.random() * 20 + 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            >
-              <Icon size={40} />
-            </motion.div>
-          );
-        })}
-      </div>
-
-      <div className="container-shell relative z-10">
-        {/* Заголовок секции */}
+    <section id="technologies" className="section-shell">
+      <div className="container-shell">
         <SectionHeading
           eyebrow={
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2"
-            >
+            <span className="inline-flex items-center gap-2">
               <Zap size={16} className="text-blue-600 dark:text-blue-400" />
               Technology Stack
-            </motion.span>
-          }
-          title={
-            <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:from-slate-100 dark:via-slate-200 dark:to-slate-100 bg-clip-text text-transparent">
-              Modern Tools We Master
             </span>
           }
-          description="We use proven modern tools to build maintainable, fast, and future-ready products for startups and enterprise teams."
+          title="Modern Tools We Master"
+          description="A curated set of production-proven technologies we use to build reliable, scalable, and maintainable products."
         />
 
-        {/* Статистика технологий */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mt-8 flex flex-wrap justify-center gap-6"
-        >
-          {Object.keys(groupedTechs).map((category, index) => {
-            const CatIcon = categoryIcons[category] || Code2;
-            const colors = ["blue", "green", "purple", "orange", "pink", "indigo"];
-            const color = colors[index % colors.length];
-            
+        {/* Фильтры по категориям */}
+        <div className="mt-8 flex flex-wrap justify-center gap-2">
+          {presentCategories.map((cat) => {
+            const conf = categoryConfig[cat];
+            const CatIcon = conf ? conf.icon : LayoutGrid;
+            const isActive = activeFilter === cat;
+            const count = cat === "All" ? technologies.length : technologies.filter((t) => techData[t]?.category === cat).length;
+
             return (
-              <motion.div
-                key={category}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full bg-${color}-100 dark:bg-${color}-900/30 border border-${color}-200 dark:border-${color}-800`}
-                whileHover={{ y: -2 }}
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveFilter(cat)}
+                className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? conf
+                      ? conf.filterActive
+                      : "bg-blue-600 border-blue-600 text-white shadow-md"
+                    : conf
+                    ? conf.filterIdle
+                    : "border-slate-200 bg-white text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                }`}
               >
-                <CatIcon size={14} className={`text-${color}-600 dark:text-${color}-400`} />
-                <span className={`text-sm font-medium text-${color}-700 dark:text-${color}-300`}>
-                  {category} ({groupedTechs[category].length})
-                </span>
-              </motion.div>
+                <CatIcon size={13} />
+                {cat === "All" ? `All (${count})` : `${cat} (${count})`}
+              </button>
             );
           })}
-        </motion.div>
+        </div>
 
-        {/* Сетка технологий */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-          {technologies.map((tech, index) => (
-            <Reveal key={tech} delay={index * 30}>
-              <TechCard tech={tech} index={index} />
-            </Reveal>
-          ))}
+        {/* Сетка карточек */}
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {technologies.map((tech, i) => {
+            const cat = techData[tech]?.category || "Tools";
+            const isFiltered = activeFilter !== "All" && cat !== activeFilter;
+            return (
+              <Reveal key={tech} delay={i * 25} className="h-full">
+                <TechCard tech={tech} isFiltered={isFiltered} />
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
