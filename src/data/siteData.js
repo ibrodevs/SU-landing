@@ -68,7 +68,7 @@ export const projects = [
     image: "/дордой.png",
     gradient: "from-blue-600 to-blue-800",
     accentColor: "blue",
-    tech: ["React", "Node.js", "PostgreSQL"],
+    tech: ["React", "Django", "PostgreSQL"],
     githubUrl: null,
     liveUrl: "https://www.dordoi.info/"
   },
@@ -82,7 +82,7 @@ export const projects = [
     image: "/kgafis.png",
     gradient: "from-slate-700 to-slate-800",
     accentColor: "slate",
-    tech: ["React", "Tailwind CSS"],
+    tech: ["React", "Tailwind CSS", "Django", "PostgreSQL"],
     githubUrl: null,
     liveUrl: "https://www.ksapcs.kg/"
   },
@@ -96,7 +96,7 @@ export const projects = [
     image: "/su-library.png",
     gradient: "from-blue-900 to-indigo-900",
     accentColor: "indigo",
-    tech: ["React", "Node.js", "PostgreSQL"],
+    tech: ["React", "Django", "PostgreSQL"],
     githubUrl: null,
     liveUrl: "https://www.su-library.com/"
   },
@@ -110,7 +110,7 @@ export const projects = [
     image: "/salymbekovuni.png",
     gradient: "from-zinc-700 to-slate-700",
     accentColor: "zinc",
-    tech: ["React", "Vite", "Tailwind CSS"],
+    tech: ["React", "Django", "Tailwind CSS"],
     githubUrl: null,
     liveUrl: "https://salymbekov.vercel.app/"
   }

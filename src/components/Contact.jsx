@@ -21,8 +21,8 @@ function Contact() {
                 </span>
                 <div>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Email</p>
-                  <a href="mailto:hello@susolutions.com" className="font-semibold text-slate-800 dark:text-slate-100">
-                    hello@susolutions.com
+                  <a href="mailto:susolutions25@gmail.com" className="font-semibold text-slate-800 dark:text-slate-100">
+                    susolutions25@gmail.com
                   </a>
                 </div>
               </div>
