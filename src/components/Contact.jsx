@@ -33,8 +33,8 @@ function Contact() {
                 </span>
                 <div>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Phone</p>
-                  <a href="tel:+996700123456" className="font-semibold text-slate-800 dark:text-slate-100">
-                    +996 (700) 123-456
+                  <a href="tel:+17735507809" className="font-semibold text-slate-800 dark:text-slate-100">
+                    +1 (773) 550-7809
                   </a>
                 </div>
               </div>
@@ -45,7 +45,7 @@ function Contact() {
                 </span>
                 <div>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Location</p>
-                  <p className="font-semibold text-slate-800 dark:text-slate-100">Bishkek, Kyrgyzstan</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100">60645 Chicago, IL United States</p>
                 </div>
               </div>
             </div>

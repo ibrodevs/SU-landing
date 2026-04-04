@@ -1,7 +1,7 @@
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-function Navbar({ links, theme, onToggleTheme }) {
+function Navbar({ links }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -42,30 +42,12 @@ function Navbar({ links, theme, onToggleTheme }) {
               </a>
             ))}
 
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-blue-200/80 bg-white/80 text-slate-700 transition hover:border-blue-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-
             <a href="#contact" className="btn-primary px-5 py-2.5 text-xs sm:text-sm">
               Get Started
             </a>
           </nav>
 
           <div className="flex items-center gap-2 md:hidden">
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-blue-200 bg-white/70 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-
             <button
               type="button"
               onClick={() => setIsOpen((prev) => !prev)}

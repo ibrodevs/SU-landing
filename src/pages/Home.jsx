@@ -18,10 +18,10 @@ function Divider() {
   );
 }
 
-function Home({ theme, onToggleTheme }) {
+function Home() {
   return (
     <>
-      <Navbar links={navLinks} theme={theme} onToggleTheme={onToggleTheme} />
+      <Navbar links={navLinks} />
       <main>
         <Hero />
         <Divider />
